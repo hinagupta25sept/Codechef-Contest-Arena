@@ -1,2 +1,2 @@
-export const DOMAIN = "https://contestarena25.netlify.com";
-export const REDIRECT_URI = "https://contestarena25.netlify.com/callback";
+export const DOMAIN = "http://a73d8dc1.ngrok.io";
+export const REDIRECT_URI = "http://a73d8dc1.ngrok.io/callback";
