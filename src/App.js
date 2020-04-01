@@ -18,7 +18,7 @@ class App extends Component {
       <div>
         <Router>
           <Route path="/" exact strict component={login} />
-          <Route path="/callback" exact strict component={callback} />
+          <Route path="/callback" component={callback} />
           <Route path="/home" exact strict component={Dashboard} />
           <Route
             path="/rankings/:contestCode"
