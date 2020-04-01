@@ -1,18 +1,14 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import { 
-  BrowserRouter as Router, 
-  Route, 
-  Link, 
-  Switch 
-} from 'react-router-dom'; 
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { DOMAIN } from "../utils/constant";
 
 class Autocomplete extends Component {
   static propTypes = {
     suggestions: PropTypes.instanceOf(Array),
-    sugg:PropTypes.instanceOf(Object)
+    sugg: PropTypes.instanceOf(Object)
   };
- 
+
   static defaultProps = {
     suggestions: [],
     sugg: {}
@@ -33,17 +29,15 @@ class Autocomplete extends Component {
     };
   }
 
-  getAccessToken()
-{
-   // console.log('this is the local access token' + localStorage.getItem('accessToken'));
-    return localStorage.getItem('accessToken');
-}
+  getAccessToken() {
+    // console.log('this is the local access token' + localStorage.getItem('accessToken'));
+    return localStorage.getItem("accessToken");
+  }
   onChange = e => {
     const { suggestions } = this.props;
     //console.log(JSON.stringify(this.props.sugg));
     const userInput = e.currentTarget.value;
-   // const sugg = ({sugg });
-    
+    // const sugg = ({sugg });
 
     // Filter our suggestions that don't contain the user's input
     const filteredSuggestions = suggestions.filter(
@@ -65,13 +59,10 @@ class Autocomplete extends Component {
       filteredSuggestions: [],
       showSuggestions: false,
       userInput: e.currentTarget.innerText
-
     });
-    var x=JSON.parse(e.currentTarget.innerText);
-    if( this.props.sugg.hasOwnProperty(x))
-    x=this.props.sugg[x];
-    window.location.replace('http://localhost:3000/contest/'+x);
- 
+    var x = JSON.parse(e.currentTarget.innerText);
+    if (this.props.sugg.hasOwnProperty(x)) x = this.props.sugg[x];
+    window.location.replace(DOMAIN + "/contest/" + x);
   };
 
   onKeyDown = e => {
@@ -160,6 +151,5 @@ class Autocomplete extends Component {
     );
   }
 }
-
 
 export default Autocomplete;

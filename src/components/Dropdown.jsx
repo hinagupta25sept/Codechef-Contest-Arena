@@ -1,17 +1,26 @@
-import React, { Component } from 'react';
-import './Dropdown.scss';
-const fonts = ['Arial', 'Helvetica', 'Times', 'Palatino', 'Times New Roman', 'Arial Black', 'Gadget', 'Comic Sans MS', 'cursive', 'Impact', 'Charcoal', 'Tahoma', 'Geneva', 'Verdana'];
+import React, { Component } from "react";
+import "./Dropdown.scss";
+const fonts = [
+  "Arial",
+  "Helvetica",
+  "Times",
+  "Palatino",
+  "Times New Roman",
+  "Arial Black",
+  "Gadget",
+  "Comic Sans MS",
+  "cursive",
+  "Impact",
+  "Charcoal",
+  "Tahoma",
+  "Geneva",
+  "Verdana"
+];
 
 class Dropdown extends Component {
-  render () {
-    const {
-      show,
-      value,
-      handleToggle,
-      handleBlur,
-      handleChange,
-    } = this.props;
-    
+  render() {
+    const { show, value, handleToggle, handleBlur, handleChange } = this.props;
+
     return (
       <div className="dropdown-container">
         <label className="arrow">
@@ -25,7 +34,7 @@ class Dropdown extends Component {
           />
         </label>
         <ul className="dropdown-list" hidden={!show}>
-          {fonts.map((font) => (
+          {fonts.map(font => (
             <li
               className="option"
               style={{ fontFamily: font }}
