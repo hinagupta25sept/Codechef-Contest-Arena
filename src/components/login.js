@@ -11,9 +11,11 @@ class login extends Component {
   render() {
     return (
       <div>
-        <button className="btn btn-primary btn -sm" onClick={this.clicked}>
-          Signin
-        </button>
+        <p align="center">
+          <button className="btn btn-primary btn -sm" onClick={this.clicked}>
+            Signin
+          </button>
+        </p>
       </div>
     );
   }

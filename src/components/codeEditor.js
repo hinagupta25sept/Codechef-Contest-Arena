@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import Dropdown from "./Dropdown";
-import "./Dropdown.scss";
+
 class CodeEditor extends Component {
   constructor(props) {
     super(props);
