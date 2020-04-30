@@ -2,46 +2,40 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { DOMAIN } from "../utils/constant";
-
+import "./styles.scss";
 class Autocomplete extends Component {
   static propTypes = {
     suggestions: PropTypes.instanceOf(Array),
-    sugg: PropTypes.instanceOf(Object)
+    sugg: PropTypes.instanceOf(Object),
   };
-
   static defaultProps = {
     suggestions: [],
-    sugg: {}
+    sugg: {},
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      // The active selection's index
       activeSuggestion: 0,
-      // The suggestions that match the user's input
+
       filteredSuggestions: [],
-      // Whether or not the suggestion list is shown
+
       showSuggestions: false,
-      // What the user has entered
-      userInput: ""
+      userInput: "",
     };
   }
 
   getAccessToken() {
-    // console.log('this is the local access token' + localStorage.getItem('accessToken'));
     return localStorage.getItem("accessToken");
   }
-  onChange = e => {
+  onChange = (e) => {
     const { suggestions } = this.props;
-    //console.log(JSON.stringify(this.props.sugg));
-    const userInput = e.currentTarget.value;
-    // const sugg = ({sugg });
 
-    // Filter our suggestions that don't contain the user's input
+    const userInput = e.currentTarget.value;
+
     const filteredSuggestions = suggestions.filter(
-      suggestion =>
+      (suggestion) =>
         suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
     );
 
@@ -49,23 +43,23 @@ class Autocomplete extends Component {
       activeSuggestion: 0,
       filteredSuggestions,
       showSuggestions: true,
-      userInput: e.currentTarget.value
+      userInput: e.currentTarget.value,
     });
   };
 
-  onClick = e => {
+  onClick = (e) => {
     this.setState({
       activeSuggestion: 0,
       filteredSuggestions: [],
       showSuggestions: false,
-      userInput: e.currentTarget.innerText
+      userInput: e.currentTarget.innerText,
     });
     var x = e.currentTarget.innerText;
     if (this.props.sugg.hasOwnProperty(x)) x = this.props.sugg[x];
     window.location.assign(DOMAIN + "/contest/" + x);
   };
 
-  onKeyDown = e => {
+  onKeyDown = (e) => {
     const { activeSuggestion, filteredSuggestions } = this.state;
 
     // User pressed the enter key
@@ -73,7 +67,7 @@ class Autocomplete extends Component {
       this.setState({
         activeSuggestion: 0,
         showSuggestions: false,
-        userInput: filteredSuggestions[activeSuggestion]
+        userInput: filteredSuggestions[activeSuggestion],
       });
     }
     // User pressed the up arrow
@@ -103,8 +97,8 @@ class Autocomplete extends Component {
         activeSuggestion,
         filteredSuggestions,
         showSuggestions,
-        userInput
-      }
+        userInput,
+      },
     } = this;
 
     let suggestionsListComponent;
@@ -122,9 +116,9 @@ class Autocomplete extends Component {
               }
 
               return (
-                <li className={className} key={suggestion} onClick={onClick}>
+                <h5 className={className} key={suggestion} onClick={onClick}>
                   {suggestion}
-                </li>
+                </h5>
               );
             })}
           </ul>

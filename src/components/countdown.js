@@ -3,16 +3,10 @@ import PropTypes from "prop-types";
 import "./styles.scss";
 class CountDown extends Component {
   static propTypes = {
+    startDate: PropTypes.instanceOf(String),
+    startTime: PropTypes.instanceOf(String),
     targetDate: PropTypes.instanceOf(String),
     targetTime: PropTypes.instanceOf(String),
-    startDate: PropTypes.instanceOf(String),
-    startTime: PropTypes.instanceOf(String)
-  };
-
-
-  static defaultProps = {
-    targetDate: "Oct 25, 2020",
-    targetTime: "18:00:00"
   };
 
   constructor(props) {
@@ -24,9 +18,10 @@ class CountDown extends Component {
       days: 0,
       hours: 0,
       minutes: 0,
-      seconds: 0
+      seconds: 0,
     },
-    isExpired: false
+    isExpired: false,
+    displayString: " ",
   };
 
   timer;
@@ -40,12 +35,20 @@ class CountDown extends Component {
     const { targetDate, targetTime, startDate, startTime } = this.props,
       now = new Date().getTime(),
       countDownDate = new Date(targetDate + " " + targetTime).getTime();
-    this.distance = countDownDate - now;
 
-    if (this.distance < 0) {
+    var comeUpDate = new Date(startDate + " " + startTime).getTime();
+    this.distance = now - countDownDate;
+    if (this.distance > 0) {
       clearInterval(this.timer);
       this.setState({ isExpired: true });
     } else {
+      var dispString = "Contest Starts In";
+      if (now - comeUpDate < 0) {
+        this.distance = comeUpDate - now;
+      } else if (countDownDate - now > 0) {
+        dispString = "Contest Ends In";
+        this.distance = countDownDate - now;
+      }
       this.setState({
         remaining: {
           days: Math.floor(this.distance / (1000 * 60 * 60 * 24)),
@@ -53,9 +56,10 @@ class CountDown extends Component {
             (this.distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
           ),
           minutes: Math.floor((this.distance % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((this.distance % (1000 * 60)) / 1000)
+          seconds: Math.floor((this.distance % (1000 * 60)) / 1000),
         },
-        isExpired: false
+        isExpired: false,
+        displayString: dispString,
       });
     }
   };
@@ -68,7 +72,7 @@ class CountDown extends Component {
 
   render() {
     const { remaining, isExpired } = this.state,
-      { targetDate, targetTime } = this.props;
+      { targetDate, targetTime, startDate, startTime } = this.props;
 
     return (
       <Fragment>
@@ -87,12 +91,10 @@ class CountDown extends Component {
             ))}
           </div>
         ) : (
-            <p className="alert-danger">Contest Ended </p>
-          )}
+          <p className="alert-danger">Contest Ended </p>
+        )}
       </Fragment>
     );
   }
 }
 export default CountDown;
-
-

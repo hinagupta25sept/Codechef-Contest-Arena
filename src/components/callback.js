@@ -7,19 +7,15 @@ class callback extends Component {
     localStorage.setItem("refreshToken", val.refresh_token);
   }
   getAccessToken() {
-    // console.log('this is the local access token' + localStorage.getItem('accessToken'));
     return localStorage.getItem("accessToken");
   }
   getRefreshToken() {
-    console.log(
-      "this is the local refresh token" + localStorage.getItem("refreshToken")
-    );
     return localStorage.getItem("refreshToken");
   }
   componentDidMount() {
     var my_code;
     const query = this.props.location.search;
-    // console.log(query);
+
     var vars = query.split("&");
     for (var i = 0; i < vars.length; i++) {
       var pair = vars[i].split("=");
@@ -43,24 +39,20 @@ class callback extends Component {
       method: "POST",
       headers: myHeaders,
       body: raw,
-      redirect: "follow"
+      redirect: "follow",
     };
 
     fetch("https://api.codechef.com/oauth/token", requestOptions)
-      .then(response => response.json())
-      .then(res => res.result.data)
-      .then(data => {
+      .then((response) => response.json())
+      .then((res) => res.result.data)
+      .then((data) => {
         this.setData(data);
         window.location.assign(DOMAIN + "/contest");
       })
-      .catch(error => console.log("error", error));
+      .catch((error) => console.log("error", error));
   }
   render() {
-    return (
-      <div >
-
-
-      </div >);
+    return <div></div>;
   }
 }
 

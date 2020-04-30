@@ -32,7 +32,7 @@ class App extends Component {
             strict
             component={Contest}
           />
-           <Route
+          <Route
             path="/rankings/:contestCode"
             exact
             strict
