@@ -1,15 +1,27 @@
 import queryString from "querystring";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import "./styles.css";
+import "./styles.scss";
 import React, { Component } from "react";
 import Autocomplete from "./Autocomplete";
-
+import { DOMAIN } from "../utils/constant";
 class Dashboard extends Component {
   state = {
     color: "#27CDE6",
     contestLists: [],
     contestMap: {}
   };
+
+  clicked = () => {
+    localStorage.clear();
+    alert(localStorage.getItem("refreshToken"));
+    window.location.replace(
+      DOMAIN
+    );
+  };
+  // getRefreshToken() {
+  //   alert(localStorage.getItem("refreshToken"));
+  //   return localStorage.getItem("refreshToken");
+  // }
 
   getAccessToken() {
     // console.log('this is the local access token' + localStorage.getItem('accessToken'));
@@ -28,7 +40,7 @@ class Dashboard extends Component {
 
     fetch(
       "https://api.codechef.com/contests/?access_token=" +
-        this.getAccessToken(),
+      this.getAccessToken(),
       requestOptions
     )
       .then(response => response.json())
@@ -39,10 +51,10 @@ class Dashboard extends Component {
         var codes = [];
         for (var i = 0; i < ans.result.data.content.contestList.length; i++) {
           names.push(
-            JSON.stringify(ans.result.data.content.contestList[i].name)
+            ans.result.data.content.contestList[i].name
           );
           names.push(
-            JSON.stringify(ans.result.data.content.contestList[i].code)
+            ans.result.data.content.contestList[i].code
           );
           maps[ans.result.data.content.contestList[i].name] =
             ans.result.data.content.contestList[i].code;
@@ -58,6 +70,9 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="primary" style={{ background: this.state.color }}>
+        <p align="center">
+          <button className="btn btn-primary btn -sm" onClick={this.clicked}>Log Out</button>
+        </p>
         <h3>Search ContestNames or contestCodes</h3>
         <Autocomplete
           suggestions={this.state.contestLists}

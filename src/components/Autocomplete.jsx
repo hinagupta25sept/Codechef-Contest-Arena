@@ -60,9 +60,9 @@ class Autocomplete extends Component {
       showSuggestions: false,
       userInput: e.currentTarget.innerText
     });
-    var x = JSON.parse(e.currentTarget.innerText);
+    var x = e.currentTarget.innerText;
     if (this.props.sugg.hasOwnProperty(x)) x = this.props.sugg[x];
-    window.location.replace(DOMAIN + "/contest/" + x);
+    window.location.assign(DOMAIN + "/contest/" + x);
   };
 
   onKeyDown = e => {

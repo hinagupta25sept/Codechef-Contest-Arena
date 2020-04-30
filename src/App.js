@@ -19,13 +19,7 @@ class App extends Component {
         <Router>
           <Route path="/" exact strict component={login} />
           <Route path="/callback" component={callback} />
-          <Route path="/home" exact strict component={Dashboard} />
-          <Route
-            path="/rankings/:contestCode"
-            exact
-            strict
-            component={Ranklist}
-          />
+          <Route path="/contest" exact component={Dashboard} />
           <Route
             path="/submissions/:contestCode/:problemCode"
             exact
@@ -37,6 +31,12 @@ class App extends Component {
             exact
             strict
             component={Contest}
+          />
+           <Route
+            path="/rankings/:contestCode"
+            exact
+            strict
+            component={Ranklist}
           />
           <Route path="/run/" exact strict component={CodeEditor} />
           <Route

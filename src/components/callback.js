@@ -1,11 +1,11 @@
 import React, { Component } from "react";
+import "./styles.scss";
 import { DOMAIN, REDIRECT_URI } from "../utils/constant";
 class callback extends Component {
   setData(val) {
     localStorage.setItem("accessToken", val.access_token);
     localStorage.setItem("refreshToken", val.refresh_token);
   }
-
   getAccessToken() {
     // console.log('this is the local access token' + localStorage.getItem('accessToken'));
     return localStorage.getItem("accessToken");
@@ -51,13 +51,16 @@ class callback extends Component {
       .then(res => res.result.data)
       .then(data => {
         this.setData(data);
-        console.log("coming here or ont");
-        window.location.replace(DOMAIN + "/home");
+        window.location.assign(DOMAIN + "/contest");
       })
       .catch(error => console.log("error", error));
   }
   render() {
-    return <div />;
+    return (
+      <div >
+
+
+      </div >);
   }
 }
 
