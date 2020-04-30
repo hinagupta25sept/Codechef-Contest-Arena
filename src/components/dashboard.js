@@ -4,6 +4,7 @@ import "./styles.scss";
 import React, { Component } from "react";
 import Autocomplete from "./Autocomplete";
 import { DOMAIN } from "../utils/constant";
+import { fetcher } from "./funct";
 class Dashboard extends Component {
   state = {
     color: "#27CDE6",
@@ -12,16 +13,15 @@ class Dashboard extends Component {
   };
 
   clicked = () => {
-    localStorage.clear();
-    alert(localStorage.getItem("refreshToken"));
-    window.location.replace(
-      DOMAIN
-    );
+    console.log(localStorage.getItem("refreshToken"));
+    // alert(localStorage.getItem("refreshToken"));
+    // window.location.replace(
+    //   DOMAIN
+    // );
   };
-  // getRefreshToken() {
-  //   alert(localStorage.getItem("refreshToken"));
-  //   return localStorage.getItem("refreshToken");
-  // }
+  getRefreshToken() {
+    return localStorage.getItem("refreshToken");
+  }
 
   getAccessToken() {
     // console.log('this is the local access token' + localStorage.getItem('accessToken'));
@@ -38,13 +38,9 @@ class Dashboard extends Component {
       redirect: "follow"
     };
 
-    fetch(
-      "https://api.codechef.com/contests/?access_token=" +
-      this.getAccessToken(),
-      requestOptions
-    )
-      .then(response => response.json())
-      .then(answer => {
+    var endpoint = "https://api.codechef.com/contests/?access_token=";
+    fetcher(endpoint, requestOptions).then(
+      answer => {
         var ans = answer;
         var names = [];
         var maps = {};

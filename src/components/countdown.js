@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 import "./styles.scss";
 class CountDown extends Component {
   static propTypes = {
-   targetDate: PropTypes.instanceOf(String),
-    targetTime: PropTypes.instanceOf(String)
+    targetDate: PropTypes.instanceOf(String),
+    targetTime: PropTypes.instanceOf(String),
+    startDate: PropTypes.instanceOf(String),
+    startTime: PropTypes.instanceOf(String)
   };
 
 
@@ -14,7 +16,8 @@ class CountDown extends Component {
   };
 
   constructor(props) {
-    super(props);}
+    super(props);
+  }
 
   state = {
     remaining: {
@@ -34,11 +37,11 @@ class CountDown extends Component {
   }
 
   setDate = () => {
-    const { targetDate, targetTime } = this.props,
+    const { targetDate, targetTime, startDate, startTime } = this.props,
       now = new Date().getTime(),
       countDownDate = new Date(targetDate + " " + targetTime).getTime();
     this.distance = countDownDate - now;
-    
+
     if (this.distance < 0) {
       clearInterval(this.timer);
       this.setState({ isExpired: true });
@@ -65,8 +68,8 @@ class CountDown extends Component {
 
   render() {
     const { remaining, isExpired } = this.state,
-    {targetDate, targetTime} = this.props;
-    
+      { targetDate, targetTime } = this.props;
+
     return (
       <Fragment>
         {!isExpired && targetDate && targetTime ? (
@@ -84,14 +87,12 @@ class CountDown extends Component {
             ))}
           </div>
         ) : (
-          <p className="alert-danger">Contest Ended </p>
-        )}
-      </Fragment> 
+            <p className="alert-danger">Contest Ended </p>
+          )}
+      </Fragment>
     );
   }
 }
 export default CountDown;
 
-// const app = <CountDown targetDate="Oct 25, 2020" targetTime="18:00:00" />;
 
-// ReactDOM.render(app, document.querySelector("#app"));

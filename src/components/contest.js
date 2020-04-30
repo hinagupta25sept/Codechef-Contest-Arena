@@ -8,8 +8,9 @@ import CountDown from "./countdown";
 
 class Contest extends Component {
   state = {
-    color: "#27CDE6",
+
     problemCode: [],
+    entries: [],
     an: " ",
     startdate: "",
     starttime: "",
@@ -19,13 +20,21 @@ class Contest extends Component {
     window.location.assign(DOMAIN + "/rankings/" + this.state.an);
   };
   getCodes() {
-    return this.state.problemCode.map(name => (
-      <div className="text-left">
-        <Link to={"/contest/" + this.state.an + "/problems/" + name}>
-          {name}
-        </Link>
-      </div>
-    ));
+    return this.state.entries.map((entry, index) => {
+      const { count, acc, name } = entry;
+      return (
+        <tr key={count}>
+
+          <td><Link to={"/contest/" + this.state.an + "/problems/" + name}>
+            {name}
+          </Link></td>
+          <td>{count}</td>
+          <td>{acc}</td>
+        </tr>
+      );
+
+    }
+    );
   }
   getAccessToken() {
     // console.log('this is the local access token' + localStorage.getItem('accessToken'));
@@ -91,15 +100,25 @@ class Contest extends Component {
           if (vre[i] != ' ')
             s4 = s4 + vre[i];
         }
+        var count = [];
+        var acc = [];
+        var name = [];
+        var participants = [];
         var y = ans.result.data.content.problemsList;
         for (var i = 0; i < y.length; i++) {
           maps.push(y[i].problemCode);
+          participants.push({
+            count: y[i].successfulSubmissions,
+            acc: y[i].accuracy,
+            name: y[i].problemCode
+          });
         }
         this.setState({
           startdate: s,
           starttime: s2,
           enddate: s3,
           endtime: s4,
+          entries: participants,
           problemCode: maps,
           an: z
         });
@@ -118,9 +137,23 @@ class Contest extends Component {
             <span>Go To Contest Ranks </span>
           </button>
         </p>
-        <h4 className="text-left">Link to Problems </h4>
-        {this.getCodes()}
+        <p align="center">
+          <h3 >Link to Problems </h3>
+          <table id="entries">
+            <tbody>
+              <tr>
+
+                <th >Problem Codes</th>
+                <th>Successfull Submissions</th>
+                <th>Accuray</th>
+              </tr>
+              {this.getCodes()}
+            </tbody>
+          </table>
+        </p>
         <CountDown
+          startDate={this.startdate}
+          startTime={this.state.starttime}
           targetDate={this.state.enddate}
           targetTime={this.state.endtime}
         />

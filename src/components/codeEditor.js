@@ -18,7 +18,7 @@ class CodeEditor extends Component {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Content-Type", "application/json");
-    //myHeaders.append("Cookie", "PHPSESSID=f2656d79561dc2931c64330c9678f00e");
+    myHeaders.append("Cookie", "PHPSESSID=f2656d79561dc2931c64330c9678f00e");
 
     var raw = JSON.stringify({ "sourceCode": this.state.sourceCode, "language": this.state.language, "input": this.state.input });
 
@@ -37,7 +37,7 @@ class CodeEditor extends Component {
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-        //myHeaders.append("Cookie", "PHPSESSID=f2656d79561dc2931c64330c9678f00e");
+        myHeaders.append("Cookie", "PHPSESSID=f2656d79561dc2931c64330c9678f00e");
 
         var requestOptions = {
           method: 'GET',
@@ -99,7 +99,7 @@ class CodeEditor extends Component {
   componentDidMount() {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    // myHeaders.append("Cookie", "PHPSESSID=5039410918aaf1ac8426a4794a4af891");
+    myHeaders.append("Cookie", "PHPSESSID=5039410918aaf1ac8426a4794a4af891");
 
     var requestOptions = {
       method: 'GET',
