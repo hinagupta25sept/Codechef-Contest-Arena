@@ -1,11 +1,9 @@
-
 //countdown component styles
 .button {
-
   border-radius: 4px;
   background-color: #2e6da4;
   border: none;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
   font-size: 18px;
   padding: 10px;
@@ -23,7 +21,7 @@
 }
 
 .button span:after {
-  content: '\00bb';
+  content: "\00bb";
   position: absolute;
   opacity: 0;
   top: 0;
@@ -45,12 +43,12 @@
   display: inline-flex;
   justify-content: center;
   width: 100%;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .entry {
   text-align: center;
-  padding: 3px;
+  padding: 1px;
 
   .entry-value {
     position: relative;
@@ -111,14 +109,14 @@
 }
 
 .alert-danger {
-    color: #721c24;
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
-    position: relative;
-    padding: .75rem 1.25rem;
-    margin-bottom: 1rem;
-    border: 1px solid transparent;
-    border-radius: .25rem;
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
   text-align: center;
 }
 
@@ -138,10 +136,6 @@
     transform: rotateX(0deg);
   }
 }
-
-
-
-
 
 .primary {
   color: darkslategrey;
@@ -204,7 +198,7 @@ tr:nth-child(even) {
 
 .dropdown {
   position: relative;
-  &.open>.dropdown-menu {
+  &.open > .dropdown-menu {
     display: block;
   }
   .dropdown-toggle {
@@ -216,8 +210,8 @@ tr:nth-child(even) {
     line-height: 1.42857143;
     text-align: center;
     white-space: nowrap;
-    vertical-align: middle;    
-    cursor: pointer;    
+    vertical-align: middle;
+    cursor: pointer;
     color: #fff;
     background-color: #337ab7;
     border-color: #2e6da4;
@@ -254,10 +248,10 @@ tr:nth-child(even) {
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
     border: 1px solid #ccc;
-    border: 1px solid rgba(0,0,0,.15);
+    border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 4px;
-    box-shadow: 0 6px 12px rgba(0,0,0,.175);
-   
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+
     li {
       cursor: pointer;
       :hover {
@@ -273,6 +267,15 @@ tr:nth-child(even) {
         white-space: nowrap;
         text-decoration: none;
       }
-    } 
-  }  
+    }
+  }
+}
+
+.suggestions {
+  h5 {
+    cursor: pointer;
+    :hover {
+      background: #ddd;
+    }
+  }
 }

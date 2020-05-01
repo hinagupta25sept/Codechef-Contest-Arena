@@ -4,20 +4,16 @@ import Dropdown from "./dropdown";
 class CodeEditor extends Component {
   state = {
     vr: [],
-    sourceCode: " ",
-    input: " ",
+    sourceCode: "",
+    input: "",
     language: " ",
     link: " ",
+    string: "",
   };
 
   clicked = () => {
     var x = document.getElementById("mytextarea").value;
     var y = document.getElementById("mytextarea2").value;
-
-    this.setState({
-      sourceCode: JSON.stringify(x),
-      input: JSON.stringify(y),
-    });
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Content-Type", "application/json");
@@ -27,7 +23,6 @@ class CodeEditor extends Component {
       language: this.state.language,
       input: y,
     });
-
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
@@ -43,26 +38,33 @@ class CodeEditor extends Component {
       .then((answer) => {
         var ans = answer;
         this.setState({ link: ans.result.data.link });
+        if (typeof this.state.link === "undefined")
+          alert("please select Language and enter sourceCode");
+        else {
+          console.log("link" + this.state.link);
 
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
+          var myHeaders = new Headers();
+          myHeaders.append("Content-Type", "application/json");
 
-        var requestOptions = {
-          method: "GET",
-          headers: myHeaders,
-          redirect: "follow",
-        };
+          var requestOptions = {
+            method: "GET",
+            headers: myHeaders,
+            redirect: "follow",
+          };
 
-        fetch(
-          "https://api.codechef.com/ide/status?access_token=" +
-            this.getAccessToken() +
-            "&link=" +
-            this.state.link,
-          requestOptions
-        )
-          .then((response) => response.json())
-          .then((answer) => console.log(answer.result.data))
-          .catch((error) => console.log("error", error));
+          fetch(
+            "https://api.codechef.com/ide/status?access_token=" +
+              this.getAccessToken() +
+              "&link=" +
+              this.state.link,
+            requestOptions
+          )
+            .then((response) => response.json())
+            .then((answer) => {
+              alert(JSON.stringify(answer.result.data));
+            })
+            .catch((error) => console.log("error", error));
+        }
       })
       .catch((error) => console.log("error", error));
   };
